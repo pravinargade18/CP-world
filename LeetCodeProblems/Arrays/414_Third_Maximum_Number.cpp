@@ -19,3 +19,34 @@ public:
         
     }
 };
+
+
+// Efficient approach
+class Solution {
+public:
+    int thirdMax(vector<int>& arr) {
+        long long int first=LONG_MIN;
+        long long int second=LONG_MIN;
+        long long int third=LONG_MIN;
+        for(int i=0;i<arr.size();i++){
+            if(arr[i]==first || arr[i]==second || arr[i]==third){   //to avoid duplicate elements
+                continue;
+            }
+            if(arr[i]>first){
+                third=second;     //third will be second means thrid maximum
+                second=first;       //second will become first means second maximum
+                first=arr[i];     // first will become maximum one
+            }
+            
+            else if(arr[i]>second){
+                third=second;
+                second=arr[i];
+            }
+            else if(arr[i]>third){
+                third=arr[i];
+            }
+        }
+        return third==LONG_MIN?first:third;
+        
+    }
+};
