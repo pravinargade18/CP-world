@@ -149,7 +149,7 @@ int main() {
     root = buildTree(root);
     //1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1 
     //level order
-    cout << "Printing the level order tracersal output " << endl;
+    cout << "Printing the level order traversal output " << endl;
     levelOrderTraversal(root);
     cout << "inorder traversal is:  ";
     inorder(root); 
