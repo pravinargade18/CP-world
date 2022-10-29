@@ -1,10 +1,3 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -116,6 +109,79 @@ void postorder(Node* root) {
 
 }
 
+Node* minVal(Node* root){
+    Node* temp=root;
+    while(temp->left!=NULL){
+        temp=temp->left;
+    }
+    return temp;
+}
+
+Node* maxVal(Node* root){
+    Node* temp=root;
+    while(temp->right!=NULL){
+        temp=temp->right;
+    }
+    return temp;
+}
+
+Node* deleteFromBST(Node* root,int val){
+    if(root==NULL){
+        return root;
+    }
+    
+    if(root->data==val){
+        // 0 child
+        if(root->left==NULL && root->right==NULL){
+            delete root;
+            return NULL;
+        }
+        
+        // 1 child
+        
+        // left exist
+        if(root->left!=NULL && root->right==NULL){
+            Node* temp=root->left;
+            delete root;
+            return temp;
+            
+        }
+        
+        // right NULL
+         if(root->left==NULL && root->right!=NULL){
+            Node* temp=root->right;
+            delete root;
+            return temp;
+            
+        }
+        // 2 childs
+        if(root->left!=NULL && root->right!=NULL){
+            // find minimum value from root->right or find max from root->left 
+            int mini=minVal(root->right)->data;
+            
+            // copy mini into root->data
+            
+            root->data=mini;
+            
+            // delete that node whose value we have copied into root->data and that node is present on right side of root so call on right side
+            root->right=deleteFromBST(root->right,mini);
+            return root;
+            
+            
+        }
+    }
+    
+    else if(val<root->data){
+        root->left=deleteFromBST(root->left,val);
+        return root;
+    }
+    
+    else{
+        root->right=deleteFromBST(root->right,val);
+        return root;
+    }
+}
+
 
 int main()
 {
@@ -132,5 +198,22 @@ int main()
     cout << endl << "postorder traversal is:  ";
     postorder(root); 
 
+    //Deletion
+    root=deleteFromBST(root,90);
+    
+    // 50 20 70 10 30 90 110 -1
+    cout<<endl;
+    cout<<endl;
+    cout<<"DELETION"<<endl;
+    cout << "Printing the level order traversal output " << endl;
+    levelOrderTraversal(root);
+    cout <<endl<< "inorder traversal is:  ";
+    inorder(root); 
+    cout << endl << "preorder traversal is:  ";
+    preorder(root); 
+    cout << endl << "postorder traversal is:  ";
+    postorder(root); 
+    
+    
     return 0;
 }
