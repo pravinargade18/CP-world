@@ -1,0 +1,25 @@
+in heap 
+********************************************************
+1.for 0 based indexing 
+heapify algo loop will be
+
+        for(int i=size/2-1;i>=0;i--){
+            heapify(ans,i,size);
+        }
+        
+pos of left child  =2*i+1
+pos of right child =2*i+2
+
+********************************************************
+
+2.for 1 based indexing 
+heapify algo loop will be
+
+        for(int i=size/2;i>0;i--){
+            heapify(ans,i,size);
+        }
+
+pos of left child =2*i
+pos of right child =2*i+1
+
+
